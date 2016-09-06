@@ -1,0 +1,10 @@
+{
+	"PATH_PUBLIC": "public/",
+	"PATH": "/",
+	"PATH_IN_CSS": "/",
+	"SRCMAP": true,
+	"JQUERY": {
+		"enabled": false,
+		"version": "1.12.4"
+	}
+}

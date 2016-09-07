@@ -1,0 +1,7 @@
+{
+    "host": "localhost",
+    "user": "ftp",
+    "password": "ftp",
+    "folder": "/public_html",
+    "local": "deploy"
+}

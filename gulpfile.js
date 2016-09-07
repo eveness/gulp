@@ -94,7 +94,7 @@ gulp.task('watch', function() {
 
 gulp.task('serve', gulp.parallel(
   ['watch'],
-  function() {
+  function browserSync() {
     var browserSync = require('browser-sync').create();
     browserSync.init({server: CFG.PATH_PUBLIC});
     browserSync.watch(CFG.PATH_PUBLIC + '**/*.html').on('change', browserSync.reload);
@@ -104,3 +104,5 @@ gulp.task('serve', gulp.parallel(
 gulp.task('init', gulp.series(['jquery', 'path', 'js', 'style', 'revision', 'html']));
 
 gulp.task('build', gulp.series(['path', 'js', 'style', 'revision-clean', 'revision', 'html']));
+
+require('./tasks/deploy.js')();

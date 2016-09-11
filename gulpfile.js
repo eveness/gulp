@@ -11,26 +11,12 @@ var rename = require('gulp-rename');
 var RevAll = require('gulp-rev-all');
 var del = require('del');
 var gulpif = require('gulp-if');
-var exec = require('child_process').exec;
 
 var CFG = JSON.parse(fs.readFileSync('settings.json'));
 
 gulp.task('path', function(cb) {
   fs.writeFileSync('less/path.less', '@path: "' + CFG.PATH_IN_CSS + '";');
   cb();
-});
-
-gulp.task('jquery', function(cb) {
-    if(CFG.JQUERY.enabled) {
-        exec('npm install jquery@' + CFG.JQUERY.version, function (err, stdout, stderr) {
-            console.log(stdout);
-            console.log(stderr);
-            cb(err);
-        });
-    } else {
-        console.log('jQuery не была установлена, так как в конфиге фигушки');
-        cb();
-    }
 });
 
 gulp.task('revision', function () {
@@ -101,8 +87,8 @@ gulp.task('serve', gulp.parallel(
   }
 ));
 
-gulp.task('init', gulp.series(['jquery', 'path', 'js', 'style', 'revision', 'html']));
-
-gulp.task('build', gulp.series(['path', 'js', 'style', 'revision-clean', 'revision', 'html']));
-
+require('./tasks/jquery.js')();
 require('./tasks/deploy.js')();
+
+gulp.task('init', gulp.series(['path', 'js', 'style', 'revision', 'html', 'jquery']));
+gulp.task('build', gulp.series(['path', 'js', 'style', 'revision-clean', 'revision', 'html', 'jquery']));

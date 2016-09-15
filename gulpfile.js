@@ -35,8 +35,8 @@ gulp.task('style', function() {
     .pipe(less())
     .pipe(postcss([ autoprefixer({ browsers: ['last 4 versions'] }) ]))
     .pipe(cssnano())
-    .pipe(gulpif(CFG.SRCMAP, sourcemaps.write()))
     .pipe(rename('style.min.css'))
+    .pipe(gulpif(CFG.SRCMAP, sourcemaps.write('.')))
     .pipe(gulp.dest(CFG.PATH_PUBLIC + 'css'));
 });
 
